@@ -53,7 +53,7 @@ class JoinForm extends ConsumerWidget {
               //     SnackBar(content: Text("유효성 검사 실패입니다")),
               //   );
               // }
-              ref.read(sessionProvider.notifier).join(model.username, model.email, model.password);
+              ref.read(sessionProvider.notifier).join(model.username.trim(), model.email.trim(), model.password.trim());
             },
           ),
           CustomTextButton(

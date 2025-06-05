@@ -12,9 +12,9 @@ class LoginForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     LoginFM fm = ref.read(loginProvider.notifier);
-    LoginModel model = ref.watch(loginProvider);
+    LoginModel model = ref.read(loginProvider);
 
-    Logger().d(model);
+    Logger().d("${model}");
     return Form(
         child: Column(
       children: [
@@ -38,7 +38,7 @@ class LoginForm extends ConsumerWidget {
         CustomElevatedButton(
           text: "로그인",
           click: () {
-            ref.read(sessionProvider.notifier).login(model.username, model.password);
+            ref.read(sessionProvider.notifier).login(model.username.trim(), model.password.trim());
             Navigator.popAndPushNamed(context, "/post/list");
           },
         ),

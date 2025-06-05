@@ -46,13 +46,19 @@ class JoinForm extends ConsumerWidget {
           const SizedBox(height: largeGap),
           CustomElevatedButton(
             text: "회원가입",
-            click: () {},
+            click: () {
+              if (fm.validate()) {
+                Navigator.pushNamed(context, "/login");
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("유효성 검사 실패")),
+                );
+              }
+            },
           ),
           CustomTextButton(
             text: "로그인 페이지로 이동",
-            click: () {
-              Navigator.pushNamed(context, "/login");
-            },
+            click: () {},
           ),
         ],
       ),

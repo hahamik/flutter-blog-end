@@ -15,32 +15,17 @@ class JoinFM extends Notifier<JoinModel> {
 
   void username(String username) {
     final error = validateUsername(username);
-    state = state.copyWith(
-      username: username,
-      usernameError: error,
-      emailError: state.emailError,
-      passwordError: state.passwordError,
-    );
+    state = state.copyWith(username: username, usernameError: error, emailError: "", passwordError: "");
   }
 
   void email(String email) {
     final error = validateEmail(email);
-    state = state.copyWith(
-      email: email,
-      emailError: error,
-      usernameError: state.usernameError,
-      passwordError: state.passwordError,
-    );
+    state = state.copyWith(email: email, usernameError: "", emailError: error, passwordError: "");
   }
 
   void password(String password) {
     final error = validatePassword(password);
-    state = state.copyWith(
-      password: password,
-      passwordError: error,
-      usernameError: state.usernameError,
-      emailError: state.emailError,
-    );
+    state = state.copyWith(password: password, usernameError: "", emailError: "", passwordError: error);
   }
 
   bool validate() {
@@ -48,11 +33,6 @@ class JoinFM extends Notifier<JoinModel> {
     final emailError = validateEmail(state.email);
     final passwordError = validatePassword(state.password);
 
-    // state = state.copyWith(
-    //   usernameError: usernameError,
-    //   emailError: emailError,
-    //   passwordError: passwordError,
-    // );
     return usernameError == null && emailError == null && passwordError == null;
   }
 }
@@ -88,9 +68,9 @@ class JoinModel {
       username ?? this.username,
       email ?? this.email,
       password ?? this.password,
-      usernameError: usernameError,
-      emailError: emailError,
-      passwordError: passwordError,
+      usernameError: usernameError == "" ? this.usernameError : usernameError,
+      emailError: emailError == "" ? this.emailError : emailError,
+      passwordError: passwordError == "" ? this.passwordError : passwordError,
     );
   }
 

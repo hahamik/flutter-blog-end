@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/size.dart';
 
 class CustomNavigation extends StatelessWidget {
   final scaffoldKey;
+
   const CustomNavigation(this.scaffoldKey, {Key? key}) : super(key: key);
 
   @override
@@ -35,6 +36,7 @@ class CustomNavigation extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   scaffoldKey.currentState!.openEndDrawer();
+                  // TODO 로그아웃 로직 자리
                   Navigator.popAndPushNamed(context, "/login");
                 },
                 child: const Text(

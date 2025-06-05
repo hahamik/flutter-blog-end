@@ -81,7 +81,15 @@ class SessionGVM extends Notifier<SessionModel> {
     Navigator.pushNamed(mContext, "/post/list");
   }
 
-  Future<void> logout() async {}
+  Future<void> logout() async {
+    // 1. 토큰 디바이스 제거
+
+    // 2. 세션 모델 초기화
+
+    // 3. DIO 세팅 제거
+
+    // 4 LOGIN 페이지 이동
+  }
 }
 
 /// 3. 창고 데이터 타입 (불변 아님)

@@ -15,6 +15,7 @@ class JoinForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     JoinFM fm = ref.read(joinProvider.notifier);
     JoinModel model = ref.watch(joinProvider);
+    print("창고 상태 : ${model.toString()}");
     return Form(
       child: Column(
         children: [
@@ -22,7 +23,6 @@ class JoinForm extends ConsumerWidget {
             text: "Username",
             onChanged: (value) {
               fm.username(value);
-              print("창고 상태 : ${model.toString()}");
             },
           ),
           const SizedBox(height: mediumGap),

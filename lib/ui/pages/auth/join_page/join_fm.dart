@@ -78,4 +78,9 @@ class JoinModel {
       passwordError: passwordError,
     );
   }
+
+  @override
+  String toString() {
+    return 'JoinModel{username: $username, email: $email, password: $password, usernameError: $usernameError, emailError: $emailError, passwordError: $passwordError}';
+  }
 }

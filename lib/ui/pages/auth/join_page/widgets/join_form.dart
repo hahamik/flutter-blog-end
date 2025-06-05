@@ -7,41 +7,39 @@ import 'package:flutter_blog/ui/widgets/custom_text_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class JoinForm extends ConsumerWidget {
-  const JoinForm({
-    super.key,
-  });
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     JoinFM fm = ref.read(joinProvider.notifier);
     JoinModel model = ref.watch(joinProvider);
-    print("창고 상태 : ${model.toString()}");
+
+    print("창고 state : ${model}");
+
     return Form(
       child: Column(
         children: [
           CustomAuthTextFormField(
-            text: "Username",
+            title: "Username",
+            errorText: model.usernameError,
             onChanged: (value) {
               fm.username(value);
             },
-            errorText: model.usernameError,
           ),
           const SizedBox(height: mediumGap),
           CustomAuthTextFormField(
-            text: "Email",
+            title: "Email",
+            errorText: model.emailError,
             onChanged: (value) {
               fm.email(value);
             },
-            errorText: model.emailError,
           ),
           const SizedBox(height: mediumGap),
           CustomAuthTextFormField(
-            text: "Password",
+            title: "Password",
+            errorText: model.passwordError,
+            obscureText: true,
             onChanged: (value) {
               fm.password(value);
             },
-            obscureText: true,
-            errorText: model.passwordError,
           ),
           const SizedBox(height: largeGap),
           CustomElevatedButton(
@@ -51,14 +49,16 @@ class JoinForm extends ConsumerWidget {
                 Navigator.pushNamed(context, "/login");
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("유효성 검사 실패")),
+                  SnackBar(content: Text("유효성 검사 실패입니다")),
                 );
               }
             },
           ),
           CustomTextButton(
             text: "로그인 페이지로 이동",
-            click: () {},
+            click: () {
+              Navigator.pushNamed(context, "/login");
+            },
           ),
         ],
       ),

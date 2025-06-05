@@ -10,22 +10,32 @@ final joinProvider = NotifierProvider<JoinFM, JoinModel>(() {
 class JoinFM extends Notifier<JoinModel> {
   @override
   JoinModel build() {
-    return JoinModel("", "", "");
+    return JoinModel("", "", "", "", "", "");
   }
 
   void username(String username) {
     final error = validateUsername(username);
-    state = state.copyWith(username: username, usernameError: error);
+    print("error : ${error}");
+    state = state.copyWith(
+      username: username,
+      usernameError: error,
+    );
   }
 
   void email(String email) {
     final error = validateEmail(email);
-    state = state.copyWith(email: email, emailError: error);
+    state = state.copyWith(
+      email: email,
+      emailError: error,
+    );
   }
 
   void password(String password) {
     final error = validatePassword(password);
-    state = state.copyWith(password: password, passwordError: error);
+    state = state.copyWith(
+      password: password,
+      passwordError: error,
+    );
   }
 
   bool validate() {
@@ -33,12 +43,7 @@ class JoinFM extends Notifier<JoinModel> {
     final emailError = validateEmail(state.email);
     final passwordError = validatePassword(state.password);
 
-    // state = state.copyWith(
-    //   usernameError: usernameError,
-    //   emailError: emailError,
-    //   passwordError: passwordError,
-    // );
-    return usernameError == null && emailError == null && passwordError == null;
+    return usernameError.isEmpty && emailError.isEmpty && passwordError.isEmpty;
   }
 }
 
@@ -48,18 +53,18 @@ class JoinModel {
   final String email;
   final String password;
 
-  final String? usernameError;
-  final String? emailError;
-  final String? passwordError;
+  final String usernameError;
+  final String emailError;
+  final String passwordError;
 
   JoinModel(
     this.username,
     this.email,
-    this.password, {
+    this.password,
     this.usernameError,
     this.emailError,
     this.passwordError,
-  });
+  );
 
   JoinModel copyWith({
     String? username,
@@ -73,9 +78,9 @@ class JoinModel {
       username ?? this.username,
       email ?? this.email,
       password ?? this.password,
-      usernameError: usernameError ?? (this.usernameError != null ? null : this.usernameError),
-      emailError: emailError ?? (this.emailError != null ? null : this.emailError),
-      passwordError: passwordError ?? (this.passwordError != null ? null : this.passwordError),
+      usernameError ?? this.usernameError,
+      emailError ?? this.emailError,
+      passwordError ?? this.passwordError,
     );
   }
 

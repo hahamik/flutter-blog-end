@@ -1,6 +1,6 @@
 import 'package:validators/validators.dart';
 
-String? validateUsername(String value) {
+String validateUsername(String value) {
   if (value.isEmpty) {
     return "유저네임에 들어갈 수 없습니다.";
   } else if (!isAlphanumeric(value)) {
@@ -10,11 +10,11 @@ String? validateUsername(String value) {
   } else if (value.length < 3) {
     return "유저네임의 최소 길이는 3자입니다.";
   } else {
-    return null;
+    return "";
   }
 }
 
-String? validatePassword(String value) {
+String validatePassword(String value) {
   if (value.isEmpty) {
     return "패스워드 공백이 들어갈 수 없습니다.";
   } else if (value.length > 12) {
@@ -22,36 +22,36 @@ String? validatePassword(String value) {
   } else if (value.length < 4) {
     return "패스워드의 최소 길이는 4자입니다.";
   } else {
-    return null;
+    return "";
   }
 }
 
-String? validateEmail(String value) {
+String validateEmail(String value) {
   if (value.isEmpty) {
     return "이메일은 공백이 들어갈 수 없습니다.";
   } else if (!isEmail(value)) {
     return "이메일 형식에 맞지 않습니다.";
   } else {
-    return null;
+    return "";
   }
 }
 
-String? validateTitle(String value) {
+String validateTitle(String value) {
   if (value.isEmpty) {
     return "제목은 공백이 들어갈 수 없습니다.";
   } else if (value.length > 30) {
     return "제목의 길이를 초과하였습니다.";
   } else {
-    return null;
+    return "";
   }
 }
 
-String? validateContent(String value) {
+String validateContent(String value) {
   if (value.isEmpty) {
     return "내용은 공백이 들어갈 수 없습니다.";
   } else if (value.length > 500) {
     return "내용의 길이를 초과하였습니다.";
   } else {
-    return null;
+    return "";
   }
 }

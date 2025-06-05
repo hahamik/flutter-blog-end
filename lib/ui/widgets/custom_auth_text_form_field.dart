@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
 class CustomAuthTextFormField extends StatelessWidget {
-  final String text;
-  final bool obscureText;
-  final String? value;
-  final String? errorText;
+  final String title;
+  final String errorText;
   final Function(String)? onChanged;
+  final bool obscureText;
 
   const CustomAuthTextFormField({
-    super.key,
-    required this.text,
-    this.obscureText = false,
-    this.value,
-    this.errorText,
+    required this.title,
+    this.errorText = "",
     this.onChanged,
+    this.obscureText = false,
   });
 
   @override
@@ -22,15 +19,14 @@ class CustomAuthTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(text),
+        Text(title),
         const SizedBox(height: smallGap),
         TextFormField(
-          initialValue: value,
           obscureText: obscureText,
           onChanged: onChanged,
           decoration: InputDecoration(
-            hintText: "Enter $text",
-            errorText: errorText,
+            hintText: "Enter $title",
+            errorText: errorText.isEmpty ? null : errorText,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
             ),

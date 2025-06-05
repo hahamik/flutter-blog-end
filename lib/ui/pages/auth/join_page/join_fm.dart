@@ -15,17 +15,32 @@ class JoinFM extends Notifier<JoinModel> {
 
   void username(String username) {
     final error = validateUsername(username);
-    state = state.copyWith(username: username, usernameError: error);
+    state = state.copyWith(
+      username: username,
+      usernameError: error,
+      emailError: state.emailError,
+      passwordError: state.passwordError,
+    );
   }
 
   void email(String email) {
     final error = validateEmail(email);
-    state = state.copyWith(email: email, emailError: error);
+    state = state.copyWith(
+      email: email,
+      emailError: error,
+      usernameError: state.usernameError,
+      passwordError: state.passwordError,
+    );
   }
 
   void password(String password) {
     final error = validatePassword(password);
-    state = state.copyWith(password: password, passwordError: error);
+    state = state.copyWith(
+      password: password,
+      passwordError: error,
+      usernameError: state.usernameError,
+      emailError: state.emailError,
+    );
   }
 
   bool validate() {

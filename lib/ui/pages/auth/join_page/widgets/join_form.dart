@@ -24,15 +24,24 @@ class JoinForm extends ConsumerWidget {
             onChanged: (value) {
               fm.username(value);
             },
+            errorText: model.usernameError,
           ),
           const SizedBox(height: mediumGap),
           CustomAuthTextFormField(
             text: "Email",
+            onChanged: (value) {
+              fm.email(value);
+            },
+            errorText: model.emailError,
           ),
           const SizedBox(height: mediumGap),
           CustomAuthTextFormField(
             text: "Password",
+            onChanged: (value) {
+              fm.password(value);
+            },
             obscureText: true,
+            errorText: model.passwordError,
           ),
           const SizedBox(height: largeGap),
           CustomElevatedButton(

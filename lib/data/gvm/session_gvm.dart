@@ -25,6 +25,8 @@ class SessionGVM extends Notifier<SessionModel> {
     return SessionModel();
   }
 
+  Future<void> isOwner(int userId) async {}
+
   Future<void> join(String username, String email, String password) async {
     Logger().d("username : ${username}, email : ${email}, password : ${password}");
     bool isValid = ref.read(joinProvider.notifier).validate();

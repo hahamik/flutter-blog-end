@@ -17,4 +17,12 @@ class PostRepository {
     Logger().d(responseBody);
     return responseBody;
   }
+
+  // 게시글 삭제 1번
+  Future<Map<String, dynamic>> deleteOne(int postId) async {
+    Response response = await dio.delete("/api/post/${postId}");
+    final responseBody = response.data;
+    Logger().d(responseBody);
+    return responseBody;
+  }
 }

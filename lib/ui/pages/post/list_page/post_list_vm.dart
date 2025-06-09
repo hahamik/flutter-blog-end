@@ -22,6 +22,15 @@ class PostListVM extends Notifier<PostListModel?> {
     Map<String, dynamic> body = await PostRepository().getList(page: page);
     state = PostListModel.fromMap(body["response"]);
   }
+
+  // 삭제 3번
+  void notifyDeleteOne(int postId) {
+    PostListModel model = state!;
+
+    model.posts = model.posts.where((p) => p.id != postId).toList();
+
+    state = state!.copyWith(posts: model.posts);
+  }
 }
 
 /// 3. 창고 데이터 타입 (불변 아님)

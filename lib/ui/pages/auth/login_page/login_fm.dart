@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 1. 창고 관리자
 final loginProvider = NotifierProvider<LoginFM, LoginModel>(() {
+  // 의존하는 VM
   return LoginFM();
 });
 
@@ -15,7 +16,6 @@ class LoginFM extends Notifier<LoginModel> {
 
   void username(String username) {
     final error = validateUsername(username);
-    print("error : ${error}");
     state = state.copyWith(
       username: username,
       usernameError: error,
@@ -69,6 +69,6 @@ class LoginModel {
 
   @override
   String toString() {
-    return 'JoinModel{username: $username,  password: $password, usernameError: $usernameError, passwordError: $passwordError}';
+    return 'LoginModel{username: $username, password: $password, usernameError: $usernameError, passwordError: $passwordError}';
   }
 }

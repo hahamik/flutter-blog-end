@@ -50,10 +50,10 @@ class JoinForm extends ConsumerWidget {
               //   Navigator.pushNamed(context, "/login");
               // } else {
               //   ScaffoldMessenger.of(context).showSnackBar(
-              //     SnackBar(content: Text("유효성 검사 실패입니다")),
+              //     SnackBar(content: Text("유효성 검사 실패입니다.")),
               //   );
               // }
-              ref.read(sessionProvider.notifier).join(model.username.trim(), model.email.trim(), model.password.trim());
+              ref.read(sessionProvider.notifier).join(model.username, model.email, model.password);
             },
           ),
           CustomTextButton(

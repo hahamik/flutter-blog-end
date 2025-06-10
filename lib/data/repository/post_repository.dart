@@ -1,15 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/utils/my_http.dart';
+import 'package:flutter_blog/data/model/post.dart';
 import 'package:logger/logger.dart';
 
 class PostRepository {
-  Future<Map<String, dynamic>> updateOne(int postId, String title, String content) async {
-    Response response = await dio.put("/api/post/${postId}", data: {"title": title, "content": content});
-    final responseBody = response.data;
-    Logger().d(responseBody);
-    return responseBody;
-  }
-
   Future<Map<String, dynamic>> write(String title, String content) async {
     Response response = await dio.post("/api/post", data: {"title": title, "content": content});
     final responseBody = response.data;
@@ -24,7 +18,6 @@ class PostRepository {
     return responseBody;
   }
 
-  // TODO 1 완료
   Future<Map<String, dynamic>> getOne(int postId) async {
     Response response = await dio.get("/api/post/${postId}");
     final responseBody = response.data;
@@ -32,9 +25,15 @@ class PostRepository {
     return responseBody;
   }
 
-  // 게시글 삭제 1번
   Future<Map<String, dynamic>> deleteOne(int postId) async {
     Response response = await dio.delete("/api/post/${postId}");
+    final responseBody = response.data;
+    Logger().d(responseBody);
+    return responseBody;
+  }
+
+  Future<Map<String, dynamic>> updateOne(Post post) async {
+    Response response = await dio.put("/api/post/${post.id}", data: {"title": post.title, "content": post.content});
     final responseBody = response.data;
     Logger().d(responseBody);
     return responseBody;

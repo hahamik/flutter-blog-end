@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/utils/my_http.dart';
 import 'package:logger/logger.dart';
 
-// 통신 , 파싱
 class UserRepository {
   Future<Map<String, dynamic>> join(String username, String email, String password) async {
     final requestBody = {
@@ -10,8 +9,9 @@ class UserRepository {
       "email": email,
       "password": password,
     };
+
     Response response = await dio.post("/join", data: requestBody);
-    Map<String, dynamic> responseBody = response.data;
+    final responseBody = response.data;
     Logger().d(responseBody);
     return responseBody;
   }
@@ -28,5 +28,14 @@ class UserRepository {
     Map<String, dynamic> responseBody = response.data;
 
     return responseBody;
+  }
+
+  Future<Map<String, dynamic>> autoLogin(String accessToken) async {
+    Response response = await dio.post("/auto/login",
+        options: Options(
+          headers: {"Authorization": accessToken},
+        ));
+    Map<String, dynamic> body = response.data;
+    return body;
   }
 }

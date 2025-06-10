@@ -13,6 +13,7 @@ class PostWriteForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     PostListVM vm = ref.read(postListProvider.notifier);
+
     return Form(
       child: ListView(
         shrinkWrap: true,

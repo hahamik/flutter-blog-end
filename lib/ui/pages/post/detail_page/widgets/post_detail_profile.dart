@@ -23,12 +23,12 @@ class PostDetailProfile extends StatelessWidget {
         ),
         subtitle: Row(
           children: [
-            Text("ssar@nate.com"), //api 서버 개발자한테 이메일 달라고 요청
+            Text("ssar@nate.com"), // api 서버 개발자한테 요청
             const SizedBox(width: mediumGap),
             const Text("·"),
             const SizedBox(width: mediumGap),
             const Text("Written on "),
-            Text("May 25 ${post.createdAt}"),
+            Text("May 25 ${post.createdAt}"), // util 만들어서 날짜 자르기
           ],
         ));
   }

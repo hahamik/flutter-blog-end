@@ -12,43 +12,39 @@ class LoginForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     LoginFM fm = ref.read(loginProvider.notifier);
     LoginModel model = ref.watch(loginProvider);
-
-    //Logger().d(model);
-
+    // Logger().d(model);
     return Form(
-      child: Column(
-        children: [
-          CustomAuthTextFormField(
-            title: "Username",
-            errorText: model.usernameError,
-            onChanged: (value) {
-              fm.username(value);
-            },
-          ),
-          const SizedBox(height: mediumGap),
-          CustomAuthTextFormField(
+        child: Column(
+      children: [
+        CustomAuthTextFormField(
+          title: "Username",
+          errorText: model.usernameError,
+          onChanged: (value) {
+            fm.username(value);
+          },
+        ),
+        const SizedBox(height: mediumGap),
+        CustomAuthTextFormField(
             title: "Password",
             errorText: model.passwordError,
             obscureText: true,
             onChanged: (value) {
               fm.password(value);
-            },
-          ),
-          const SizedBox(height: largeGap),
-          CustomElevatedButton(
-            text: "로그인",
-            click: () {
-              ref.read(sessionProvider.notifier).login(model.username, model.password);
-            },
-          ),
-          CustomTextButton(
-            text: "회원가입 페이지로 이동",
-            click: () {
-              Navigator.pushNamed(context, "/join");
-            },
-          ),
-        ],
-      ),
-    );
+            }),
+        const SizedBox(height: largeGap),
+        CustomElevatedButton(
+          text: "로그인",
+          click: () {
+            ref.read(sessionProvider.notifier).login(model.username, model.password);
+          },
+        ),
+        CustomTextButton(
+          text: "회원가입 페이지로 이동",
+          click: () {
+            Navigator.pushNamed(context, "/join");
+          },
+        )
+      ],
+    ));
   }
 }

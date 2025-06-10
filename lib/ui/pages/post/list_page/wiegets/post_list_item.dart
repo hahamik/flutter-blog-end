@@ -19,6 +19,7 @@ class PostListItem extends StatelessWidget {
         maxLines: 1,
       ),
       trailing: ClipOval(
+        // borderRadius: BorderRadius.circular(50), // 네모난 이미지를 동그랗게 만들기 위한 값 설정
         child: CachedNetworkImage(
           imageUrl: "${baseUrl}${post.user.imgUrl}",
           fit: BoxFit.cover,

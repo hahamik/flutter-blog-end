@@ -5,8 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CustomNavigation extends ConsumerWidget {
   final scaffoldKey;
-
-  const CustomNavigation(this.scaffoldKey);
+  const CustomNavigation(this.scaffoldKey, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,6 +39,7 @@ class CustomNavigation extends ConsumerWidget {
               TextButton(
                 onPressed: () {
                   gvm.logout();
+                  Navigator.popAndPushNamed(context, "/login");
                 },
                 child: const Text(
                   "로그아웃",

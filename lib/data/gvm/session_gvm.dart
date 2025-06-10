@@ -25,7 +25,33 @@ class SessionGVM extends Notifier<SessionModel> {
     return SessionModel();
   }
 
-  Future<void> isOwner(int userId) async {}
+  Future<void> autoLogin() async {
+    String? accessToken = await secureStorage.read(key: "accessToken");
+
+    if (accessToken == null) {
+      Navigator.pushNamed(mContext, "/login"); // Splash 페이지 없애고 이동
+      return;
+    }
+    Map<String, dynamic> body = await UserRepository().autoLogin(accessToken);
+    if (!body["success"]) {
+      ScaffoldMessenger.of(mContext).showSnackBar(
+        SnackBar(content: Text("${body["errorMessage"]}")),
+      );
+      Navigator.pushNamed(mContext, "/login"); // Splash 페이지 없애고 이동
+      return;
+    }
+
+    User user = User.fromMap(body["response"]);
+    user.accessToken = accessToken;
+
+    state = SessionModel(user: user, isLogin: true);
+
+    // 6. dio의 header에 토큰 세팅 (Bearer 이거 붙어 있음)
+    dio.options.headers["Authorization"] = user.accessToken;
+
+    // 7. 게시글 목록 페이지 이동
+    Navigator.pushNamed(mContext, "/post/list");
+  }
 
   Future<void> join(String username, String email, String password) async {
     Logger().d("username : ${username}, email : ${email}, password : ${password}");
@@ -71,7 +97,7 @@ class SessionGVM extends Notifier<SessionModel> {
     // 3. 파싱
     User user = User.fromMap(body["response"]);
 
-    // 4. 토큰을 디바이스 저장 (앱을 다시 시작할때, 자동 로그인하려고)
+    // 4. 토큰을 디바이스 저장 (앱을 다시 시작할 때 자동 로그인 하려고)
     await secureStorage.write(key: "accessToken", value: user.accessToken);
 
     // 5. 세션모델 갱신
@@ -96,7 +122,7 @@ class SessionGVM extends Notifier<SessionModel> {
 
     // 4. login 페이지 이동
     scaffoldKey.currentState!.openEndDrawer();
-    Navigator.pushNamed(mContext, "/login");
+    Navigator.pushNamedAndRemoveUntil(mContext, "/login", (route) => false);
   }
 }
 

@@ -15,7 +15,8 @@ class PostDetailBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     PostDetailModel? model = ref.watch(postDetailProvider(postId));
-    // TODO 모델 데이터 렌더링
+
+    // TODO 4 : model 데이터 렌더링하기
     if (model == null) {
       return Center(child: CircularProgressIndicator());
     } else {
@@ -25,9 +26,8 @@ class PostDetailBody extends ConsumerWidget {
           children: [
             PostDetailTitle("${model.post.title}"),
             const SizedBox(height: largeGap),
-            // 프로파일에는 유저 넘기고 이메일 생략
-            PostDetailProfile(model.post),
-            PostDetailButtons(model.post),
+            PostDetailProfile(model.post), // user 넘기고
+            PostDetailButtons(model.post), // post 넘기기
             const Divider(),
             const SizedBox(height: largeGap),
             PostDetailContent("${model.post.content}"),

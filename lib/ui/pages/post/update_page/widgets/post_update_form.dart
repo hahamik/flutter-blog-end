@@ -38,7 +38,7 @@ class PostUpdateForm extends ConsumerWidget {
           CustomElevatedButton(
             text: "글 수정하기",
             click: () {
-              vm.updateOne(post.id, post.title, post.content);
+              vm.updateOne(post);
             },
           ),
         ],

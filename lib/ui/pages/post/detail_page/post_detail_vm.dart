@@ -29,6 +29,30 @@ class PostDetailVM extends AutoDisposeFamilyNotifier<PostDetailModel?, int> {
     return null;
   }
 
+  Future<void> updateOne(int postId, String title, String content) async {
+    // 1. 레포지토리 함수 호출
+    Logger().d("글 수정하기 버튼 클릭 $title, $content");
+    Map<String, dynamic> body = await PostRepository().updateOne(postId, title, content);
+    // 2. 성공 여부 확인
+    if (!body["success"]) {
+      ScaffoldMessenger.of(mContext).showSnackBar(
+        SnackBar(content: Text("게시글 수정 실패 : ${body["errorMessage"]}")),
+      );
+      return;
+    }
+
+    // 3. 파싱
+    Post nextPost = Post.fromMap(body["response"]);
+
+    // 4-1. 디테일 상태 갱신
+    state = state!.copyWith(post: nextPost);
+
+    // 4-1. 리스트 상태 갱신
+    ref.read(postListProvider.notifier).notifyUpdate(nextPost);
+    // 5. 글쓰기 화면 pop
+    Navigator.pop(mContext);
+  }
+
   Future<void> deleteOne(int postId) async {
     Map<String, dynamic> body = await PostRepository().deleteOne(postId);
     if (!body["success"]) {

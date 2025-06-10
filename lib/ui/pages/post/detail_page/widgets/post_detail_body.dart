@@ -30,7 +30,7 @@ class PostDetailBody extends ConsumerWidget {
             PostDetailButtons(model.post),
             const Divider(),
             const SizedBox(height: largeGap),
-            PostDetailContent("내용"),
+            PostDetailContent("${model.post.content}"),
           ],
         ),
       );

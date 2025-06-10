@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 
 class CustomTextArea extends StatelessWidget {
   final String hint;
-  final TextEditingController controller;
+  final Function(String)? onChanged;
 
-  const CustomTextArea({
-    Key? key,
-    required this.hint,
-    required this.controller,
-  }) : super(key: key);
+  CustomTextArea({required this.hint, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        controller: controller,
         maxLines: 10,
+        onChanged: onChanged,
         decoration: InputDecoration(
           hintText: "Enter $hint",
           enabledBorder: OutlineInputBorder(
